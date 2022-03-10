@@ -19,6 +19,9 @@ typedef struct Scoreboard {
     struct Scoreboard *next; 
 } Scoreboard;
 
+
+// Add a driver within a team to the scoreboard.
+
 int A(Scoreboard *board, char *surname, char *team) {
     Scoreboard *og = board;
     while(board && board->driver != NULL) {
@@ -83,6 +86,8 @@ int compare_time(const void *a, const void *b) {
     else return 0;
 };
 
+// Print the scoreboard
+
 void L(Scoreboard *board) {
     if(!board->driver) return;
     Scoreboard *og = board;
@@ -110,6 +115,8 @@ void L(Scoreboard *board) {
     }
     fprintf(stdout, "SUCCESS\n");
 };
+
+// Add a given amount of hours, minutes and seconds to a known driver's total time.
 
 int U(Scoreboard *board, char *surname, int hour, int minute, int second) {
     if(hour < 0) {
@@ -152,6 +159,8 @@ int U(Scoreboard *board, char *surname, int hour, int minute, int second) {
     return 1;
 };
 
+// Write to file.
+
 int W(Scoreboard *board, char *filename) {
     FILE *file = fopen(filename, "w");
     if(!file) {
@@ -193,6 +202,8 @@ int W(Scoreboard *board, char *filename) {
     fclose(file);
     return 1;
 }
+
+// Load a file and add it to scoreboard.
 
 int O(Scoreboard *board, char *filename) {
     FILE *file = fopen(filename, "r");
@@ -248,6 +259,8 @@ int O(Scoreboard *board, char *filename) {
     fclose(file);
     return 1;
 }
+
+// Exit program
 
 void Q(Scoreboard *board) {
     if(!board->driver) {
